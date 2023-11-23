@@ -1,42 +1,52 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
+	import Home from "$lib/asset/home.svg"
+	import Code from "$lib/asset/code.svg"
 </script>
+
+<style>
+  .centered {
+		display: flex; /* or grid */
+		justify-content: center;
+		align-items: center;
+	}
+
+	#lead-app-bar {
+		margin-left: 1em;
+	}
+</style> 
 
 <!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
-		<AppBar>
+		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" padding="p-3">
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Skeleton</strong>
+				<strong class="text-xl uppercase" id="lead-app-bar">Crash Can</strong>
 			</svelte:fragment>
-			<svelte:fragment slot="trail">
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://discord.gg/EXqV7W8MtY"
-					target="_blank"
-					rel="noreferrer"
+			<nav>
+				<TabGroup 
+				justify="justify-center"
+				active="variant-filled-primary"
+				hover="hover:variant-soft-primary"
+				flex="flex-1 lg:flex-none"
+				rounded=""
+				border=""
+				class="bg-surface-100-800-token w-full"
 				>
-					Discord
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://twitter.com/SkeletonUI"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Twitter
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/skeletonlabs/skeleton"
-					target="_blank"
-					rel="noreferrer"
-				>
-					GitHub
-				</a>
-			</svelte:fragment>
+					<TabAnchor href="/" target="_self">
+						<span class="centered"><img src={Home} alt=""/></span>
+						<span>Home</span>
+					</TabAnchor>
+					<TabAnchor href="/cpp" target="_self">
+						<span class="centered"><img src={Code} alt=""/></span>
+						<span>C++</span>
+					</TabAnchor>
+				
+				</TabGroup>
+			</nav>
+			<svelte:fragment slot="trail"></svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
