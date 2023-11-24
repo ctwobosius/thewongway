@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>The Wong Way</title>
+</svelte:head>
+
 <div class="container h-full mx-auto flex justify-center items-center">
 	<div class="prose lg:prose-xl prose max-w-full dark:prose-invert space-y-10 text-center flex flex-col items-center">
 		<h1>Welcome!</h1>

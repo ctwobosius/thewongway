@@ -1,10 +1,11 @@
+<svelte:head>
+	<title>The Wong Way: C++</title>
+</svelte:head>
+
 <script lang="ts">
-	import { TreeView, TreeViewItem, type TreeViewNode, CodeBlock } from '@skeletonlabs/skeleton';
+	import { TreeView, TreeViewItem, CodeBlock } from '@skeletonlabs/skeleton';
 
 	let myTreeView: TreeView;
-
-	// myTreeView.expandAll();
-	// myTreeView.collapseAll();
 </script>
 
 <head>
