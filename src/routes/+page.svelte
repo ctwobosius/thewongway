@@ -1,209 +1,167 @@
 <script lang="ts">
 	import { Avatar } from '@skeletonlabs/skeleton';
+	import UserCheck from '$lib/asset/user-check.svg';
+	import Hipster from '$lib/asset/hipster_625710.png';
 
-	let currentMessage = '';
+	// Class representing a fixed message and its reply.
+	class FixedMessage {
+		msg: string;
+		reply: string;
+
+		constructor(msg: string, reply: string) {
+			this.msg = msg;
+			this.reply = reply;
+		}
+	}
+
+	// Series of fixed dialogue.
+	const chat = [
+		new FixedMessage(
+			'Hello!',
+			"You must've come to the Wong place, because I don't know your name!"
+		),
+		new FixedMessage(
+			'...Dad? Is that you?',
+			"Well, you never know who you're talking to on the internet! I could be your dad in disguise, who knows!"
+		),
+		new FixedMessage(
+			'...ha...',
+			'Yeah, no laughter, I guess dad jokes are kind of old. Well, dads in general are kind of old.'
+		),
+		new FixedMessage(
+			'Do you always crack bad jokes?',
+			'Well, I try. Not to make bad ones, that is! Ah, where are my manners? My name is Mr. Wong!'
+		),
+		new FixedMessage(
+			'Why would I tell my name to a random stranger on the internet?',
+			"Nice job, listening to your mother! Or your common sense, anyways, you're in luck! I respect your privacy, so no need to tell me! Please don't."
+		),
+		new FixedMessage(
+			'Good.',
+			'Well, I like turning thoughts into reality, whether that be written on paper or in code, digital or physical. This website happened to pop into my brain one day, so now here it is!'
+		),
+		new FixedMessage(
+			'TLDR, keep your backstory to 10 words or less.',
+			'Uh, read about me, see some art, play a game or two, and enjoy your stay here?'
+		),
+		new FixedMessage(
+			"For someone who codes, you really can't count.",
+			"You youngsters just can't pay attention these days..."
+		),
+		new FixedMessage('Ok boomer', '>:(')
+	];
+
+	let fixed_msg_idx = 0;
+
+	function getCurrentTimestamp(): string {
+		return new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+	}
+
+	let elemChat: HTMLElement;
+	let currentMessage = chat[fixed_msg_idx].msg;
+	let send_disabled = false;
+	function is_send_disabled(): boolean {
+		return currentMessage == '';
+	}
 
 	let messageFeed = [
 		{
 			id: 0,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: 'Hello!',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 1,
 			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message: "You must've come to the Wong place, because I don't know your name!",
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 2,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: '...Dad? Is that you?',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 3,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message:
-				"Well, you never know who you're talking to on the internet! I could be your dad in disguise, who knows!",
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 4,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: '...ha...',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 5,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message:
-				'Yeah, no laughter, I guess dad jokes are kind of old. Well, dads in general are kind of old.',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 6,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: 'Do you always crack bad jokes?',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 7,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message:
-				'Well, I try. Not to make bad ones, that is! Ah, where are my manners? My name is Mr. Wong!',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 8,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: 'Why would I tell my name to a random stranger on the internet?',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 9,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message:
-				"Nice job, listening to your mother! Or your common sense, anyways, you're in luck! I respect your privacy, so no need to tell me! Please don't.",
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 10,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: 'Good.',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 11,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message:
-				'Well, I like turning thoughts into reality, whether that be written on paper or in code, digital or physical. This website happened to pop into my brain one day, so now here it is!',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 12,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: 'TLDR, keep your backstory to 10 words or less.',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 13,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message: 'Uh, read about me, see some art, play a game or two, and enjoy your stay here?',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 14,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: "For someone who codes, you really can't count.",
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 15,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message: "You youngsters just can't pay attention these days...",
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 16,
-			host: true,
-			avatar: 48,
-			name: 'Jane',
-			timestamp: 'Yesterday @ 2:30pm',
-			message: 'Ok boomer',
-			color: 'variant-soft-primary'
-		},
-		{
-			id: 17,
-			host: false,
-			avatar: 14,
-			name: 'Michael',
-			timestamp: 'Yesterday @ 2:45pm',
-			message: '>:(',
+			name: 'Calvin',
+			timestamp: getCurrentTimestamp(),
+			message: 'Hi!',
 			color: 'variant-soft-primary'
 		}
 	];
+
+	// Runs through fixed conversation
+	function advanceMessage(): void {
+		if (fixed_msg_idx >= chat.length) {
+			return;
+		}
+		const newMessage = {
+			id: messageFeed.length,
+			host: true,
+			name: 'You',
+			timestamp: getCurrentTimestamp(),
+			message: chat[fixed_msg_idx].msg,
+			color: 'variant-soft-primary'
+		};
+		const newReply = {
+			id: messageFeed.length,
+			host: false,
+			name: 'Calvin',
+			timestamp: getCurrentTimestamp(),
+			message: chat[fixed_msg_idx].reply,
+			color: 'variant-soft-primary'
+		};
+		fixed_msg_idx++;
+
+		// Immediately send our fixed message
+		messageFeed = [...messageFeed, newMessage];
+		send_disabled = true;
+		currentMessage = '';
+		setTimeout(() => {
+			scrollChatBottom('smooth');
+		}, 10);
+
+		// Have delayed reply
+		setTimeout(() => {
+			messageFeed = [...messageFeed, newReply];
+		}, 1000);
+		setTimeout(() => {
+			scrollChatBottom('smooth');
+		}, 1050);
+
+		// If we have more messages left, put them in the input field
+		if (fixed_msg_idx >= chat.length) {
+			return;
+		}
+		setTimeout(() => {
+			currentMessage = chat[fixed_msg_idx].msg;
+			send_disabled = false;
+		}, 1250);
+	}
+
+	function scrollChatBottom(behavior?: ScrollBehavior): void {
+		elemChat.scrollTo({ top: elemChat.scrollHeight, behavior });
+	}
 </script>
 
 <svelte:head>
 	<title>The Wong Way</title>
 </svelte:head>
 
-<div class="container h-full mx-auto flex justify-center items-center">
+<div class="container w-full mx-auto flex justify-center items-center">
 	<div
 		class="prose lg:prose-xl prose max-w-full dark:prose-invert space-y-10 text-center flex flex-col items-center"
 	>
+		<br>
 		<h1>Welcome!</h1>
 		<!-- Animated BG -->
 		<section class="img-bg" />
 
 		<div class="space-y-2">
+			<p></p>
 			<p>
 				I'm on break, so I decided now would be a good time to consolidate learnings, and also learn
 				a little bit of Svelte :D
 			</p>
-			<p><strong> UNDER CONSTRUCTION </strong></p>
+			<p>Icons designed by Freepik and FeatherIcons</p>
+			<p>
+				<strong> UNDER CONSTRUCTION </strong>
+			</p>
 		</div>
 	</div>
-
-
-<br>
-<div class="grid grid-cols-[auto_1fr] gap-2 w-full">
+	<br />
+</div>
+<div bind:this={elemChat} class="max-h-[500px] min-h-[500px] p-4 overflow-y-auto space-y-4">
 	{#each messageFeed as bubble, i}
-		
 		{#if bubble.host === false}
 			<!-- Host Message Bubble -->
 			<div class="grid grid-cols-[auto_1fr] gap-2">
-				<Avatar src="https://i.pravatar.cc/?img={bubble.avatar}" width="w-12" />
+				<Avatar src={Hipster} width="w-12" />
 				<div class="card p-4 variant-soft rounded-tl-none space-y-2">
 					<header class="flex justify-between items-center">
 						<p class="font-bold">{bubble.name}</p>
@@ -213,40 +171,45 @@
 				</div>
 			</div>
 		{:else}
-		<div class="grid grid-cols-[1fr_auto] gap-2">
-			<div class="card p-4 rounded-tr-none space-y-2 {bubble.color}">
-				<header class="flex justify-between items-center">
-					<p class="font-bold">{bubble.name}</p>
-					<small class="opacity-50">{bubble.timestamp}</small>
-				</header>
-				<p>{bubble.message}</p>
+			<!-- Nonhost Message Bubble -->
+			<div class="grid grid-cols-[1fr_auto] gap-2">
+				<div class="card p-4 rounded-tr-none space-y-2 {bubble.color}">
+					<header class="flex justify-between items-center">
+						<p class="font-bold">{bubble.name}</p>
+						<small class="opacity-50">{bubble.timestamp}</small>
+					</header>
+					<p>{bubble.message}</p>
+				</div>
+				<Avatar src={UserCheck} width="w-12" />
 			</div>
-			<Avatar src="https://i.pravatar.cc/?img={bubble.avatar}" width="w-12" />
-		</div>
 		{/if}
-		<br>
+		<br />
 	{/each}
 </div>
 
-
-</div>
-
-<div
-	class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token h-32 m-4"
->
+<footer class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token">
 	<div class="input-group-shim"></div>
-	<textarea
-		bind:value={currentMessage}
-		class="bg-transparent border-0 ring-0"
+	<input
+		style="vertical-align: middle; padding-left: 0.75vw;"
+		readonly="true"
 		name="prompt"
 		id="prompt"
-		placeholder="Write a message..."
-		rows="1"
+		placeholder="Free will? This chat isn't having any of that... ;)"
+		bind:value={currentMessage}
 	/>
-	<button class="variant-filled-primary">Send</button>
-</div>
+
+	<button class="variant-filled-primary" disabled={is_send_disabled()} on:click={advanceMessage}
+		>Send</button
+	>
+</footer>
 
 <style lang="postcss">
+	footer {
+		position: fixed;
+		height: 5vh;
+		top: 95vh;
+	}
+
 	figure {
 		@apply flex relative flex-col;
 	}
