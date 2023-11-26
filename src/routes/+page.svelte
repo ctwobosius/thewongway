@@ -206,8 +206,8 @@
 <style lang="postcss">
 	footer {
 		position: fixed;
-		height: 5vh;
-		top: 95vh;
+		height: 5svh;
+		top: 95svh;
 	}
 
 	figure {
