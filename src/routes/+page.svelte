@@ -59,9 +59,9 @@
 
 	let elemChat: HTMLElement;
 	let currentMessage = chat[fixed_msg_idx].msg;
-	let send_disabled = false;
-	function is_send_disabled(): boolean {
-		return currentMessage == '';
+
+	function is_send_disabled(msg: string): boolean {
+		return msg == '';
 	}
 
 	let messageFeed = [
@@ -100,7 +100,6 @@
 
 		// Immediately send our fixed message
 		messageFeed = [...messageFeed, newMessage];
-		send_disabled = true;
 		currentMessage = '';
 		setTimeout(() => {
 			scrollChatBottom('smooth');
@@ -120,7 +119,6 @@
 		}
 		setTimeout(() => {
 			currentMessage = chat[fixed_msg_idx].msg;
-			send_disabled = false;
 		}, 1250);
 	}
 
@@ -198,7 +196,7 @@
 		bind:value={currentMessage}
 	/>
 
-	<button class="variant-filled-primary" disabled={is_send_disabled()} on:click={advanceMessage}
+	<button class="variant-filled-primary" disabled={is_send_disabled(currentMessage)} on:click={advanceMessage}
 		>Send</button
 	>
 </footer>
