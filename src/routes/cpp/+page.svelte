@@ -13,7 +13,7 @@
 </head>
 
 <div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-10 flex flex-col">
+	<div class="space-y-10  w-full">
 		<!-- Animated Logo -->
 		<section class="img-bg" />
 
