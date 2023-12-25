@@ -65,7 +65,7 @@
                       code={paragraph.substring(1)}
                     ></CodeBlock>
                   {:else}
-                    <p contenteditable=true bind:innerHTML={paragraph}></p>
+                    <p>{@html paragraph}</p>
                   {/if}
                 {/each}
 
@@ -84,7 +84,7 @@
                             code={paragraph.substring(1)}
                           ></CodeBlock>
                         {:else}
-                          <p contenteditable=true bind:innerHTML={paragraph}></p>
+                          <p>{@html paragraph}</p>
                         {/if}
                     {/each}
 										</svelte:fragment>
