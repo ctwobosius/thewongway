@@ -2,16 +2,7 @@
 	import '$lib/css/background.pcss';
 	import '$lib/css/code_tutorial.pcss';
 
-	import { TreeView, TreeViewItem, CodeBlock, storeHighlightJs } from '@skeletonlabs/skeleton';
-
-	import hljs from 'highlight.js/lib/core';
-	import 'highlight.js/styles/github-dark.css';
-
-	// Import each language module you require
-	import python from 'highlight.js/lib/languages/python';
-
-	storeHighlightJs.set(hljs);
-	hljs.registerLanguage('python', python);
+	import { TreeView, TreeViewItem, CodeBlock } from '@skeletonlabs/skeleton';
 
 	let myTreeView: TreeView;
 

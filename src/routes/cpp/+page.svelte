@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TreeView, TreeViewItem, CodeBlock, storeHighlightJs } from '@skeletonlabs/skeleton';
+	import { storeHighlightJs } from '@skeletonlabs/skeleton';
 
 	import hljs from 'highlight.js/lib/core';
 	import 'highlight.js/styles/github-dark.css';
@@ -12,7 +12,6 @@
 	storeHighlightJs.set(hljs);
 	hljs.registerLanguage('cpp', cpp);
 
-	let myTreeView: TreeView;
 	const sections_ = {
 		'Why does C++ exist?': [
 			"The age old question, except you're not asking yourself, and you probably don't want to get into an internet debate. Oversimplified:",
@@ -70,8 +69,9 @@ int main()
 				'which prints <code>Bob has 5 possums, and ate 0 bones :D</code>',
 				"Say goodbye to <code class='old_code'>malloc</code> and <code class='old_code'>free</code>! If you still want to follow the C way of doing things, you should use <code>new</code> and <code>delete</code> instead:",
 				`>
+#include <iostream>
 
-				// Note: DO NOT put the following line in a header file
+// Note: DO NOT put the following line in a header file
 using namespace std;
 
 class BoneEater {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TreeView, TreeViewItem, CodeBlock, storeHighlightJs } from '@skeletonlabs/skeleton';
+	import { storeHighlightJs } from '@skeletonlabs/skeleton';
 
 	import hljs from 'highlight.js/lib/core';
 	import 'highlight.js/styles/github-dark.css';
