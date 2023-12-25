@@ -20,6 +20,10 @@
 		height: 3vh;
 		max-height: 3vh;
 	}
+
+	#footer {
+		margin-bottom: 4em;
+	}
 </style> 
 
 <!-- App Shell -->
@@ -69,4 +73,6 @@
 	</svelte:fragment>
 	<!-- Page Route Content -->
 	<slot />
+	<div id="footer" class="centered">© 2023 Calvin Wong. All Laughs Reserved.<div>
+
 </AppShell>
