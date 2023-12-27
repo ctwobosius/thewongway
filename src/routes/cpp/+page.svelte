@@ -122,9 +122,19 @@ int main()
 	console.log(hljs);
 </script>
 
-<CodeTutorial
-	page_suffix="C++"
-	title="Gee, Yet Another C++ Guide"
-	sections={sections_}
-	default_language="cpp"
-></CodeTutorial>
+
+<!-- Body -->
+<div class="container mx-auto flex justify-center items-center">
+	<div class="space-y-10 w-full">
+		<br>
+		<!-- Animated Logo -->
+		<section class="img-bg" />
+
+		<article class="prose prose-neutral lg:prose-xl prose max-w-full dark:prose-invert">
+			<h1 class="text-center">"Gee, Yet Another C++ Guide"</h1>
+			<CodeTutorial page_suffix="C++" sections={sections_} default_language="cpp"></CodeTutorial>
+		</article>
+
+
+	</div>
+</div>
