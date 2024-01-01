@@ -29,59 +29,78 @@
 	<button class="btn variant-filled" on:click={myTreeView.expandAll}>Expand All</button>
 	<button class="btn variant-filled" on:click={myTreeView.collapseAll}>Collapse All</button>
 </div>
-<br>
+<br />
 
-<TreeView bind:this={myTreeView}>
-	<!-- Main Sections -->
-	{#each Object.entries(sections) as [title, array_or_map]}
-		<TreeViewItem open>
-			<h2>{title}</h2>
-			<svelte:fragment slot="children">
-				<!-- No Subsections -->
-				{#if Array.isArray(array_or_map)}
-					<!-- Paragraph or Code Block -->
-					{#each Object.entries(array_or_map) as [_index, paragraph]}
-						{#if paragraph[0] == '>'}
-							<CodeBlock
-								class="cursor-default not-prose w-full max-w-full"
-								language={default_language}
-								code={paragraph.substring(1)}
-							></CodeBlock>
-						{:else}
-							<p>{@html paragraph}</p>
-						{/if}
-					{/each}
+<div class="with-backdrop">
+	<TreeView bind:this={myTreeView}>
+		<!-- Main Sections -->
+		{#each Object.entries(sections) as [title, array_or_map]}
+			<TreeViewItem open>
+				<h2>{title}</h2>
+				<svelte:fragment slot="children">
+					<!-- No Subsections -->
+					{#if Array.isArray(array_or_map)}
+						<!-- Paragraph or Code Block -->
+						{#each Object.entries(array_or_map) as [_index, paragraph]}
+							{#if paragraph[0] == '>'}
+								<div class="code-with-backdrop">
+									<CodeBlock
+										class="cursor-default not-prose w-full max-w-full bg-slate-500"
+										background="bg-neutral-900"
+										language={default_language}
+										code={paragraph.substring(1)}
+									></CodeBlock>
+								</div>
+							{:else}
+								<p>{@html paragraph}</p>
+							{/if}
+						{/each}
 
-					<!-- Subsection -->
-				{:else}
-					{#each Object.entries(array_or_map) as [subtitle, subparagraph]}
-						<TreeViewItem open>
-							<h3>{subtitle}</h3>
-							<svelte:fragment slot="children">
-								<!-- Paragraph or Code Block -->
-								{#each Object.entries(subparagraph) as [_index, paragraph]}
-									{#if paragraph[0] == '>'}
-										<CodeBlock
-											class="cursor-default not-prose w-full max-w-full"
-											language={default_language}
-											code={paragraph.substring(1)}
-										></CodeBlock>
-									{:else}
-										<p>{@html paragraph}</p>
-									{/if}
-								{/each}
-							</svelte:fragment>
-						</TreeViewItem>
-					{/each}
-				{/if}
-			</svelte:fragment>
-		</TreeViewItem>
-	{/each}
-</TreeView>
+						<!-- Subsection -->
+					{:else}
+						{#each Object.entries(array_or_map) as [subtitle, subparagraph]}
+							<TreeViewItem open>
+								<h3>{subtitle}</h3>
+								<svelte:fragment slot="children">
+									<!-- Paragraph or Code Block -->
+									{#each Object.entries(subparagraph) as [_index, paragraph]}
+										{#if paragraph[0] == '>'}
+											<div class="code-with-backdrop">
+												<CodeBlock
+													class="cursor-default not-prose w-full max-w-full"
+													language={default_language}
+													code={paragraph.substring(1)}
+												></CodeBlock>
+											</div>
+										{:else}
+											<p>{@html paragraph}</p>
+										{/if}
+									{/each}
+								</svelte:fragment>
+							</TreeViewItem>
+						{/each}
+					{/if}
+				</svelte:fragment>
+			</TreeViewItem>
+		{/each}
+	</TreeView>
+</div>
 
 <style lang="postcss">
 	h2,
 	h3 {
 		margin: 0.5em;
+	}
+
+	.code-with-backdrop {
+		background-color: rgba(16, 24, 34, 0.65);
+		border-radius: 1em;
+		padding: 1em;
+	}
+
+	.with-backdrop {
+		background-color: rgba(65, 32, 28, 0.65);
+		border-radius: 1em;
+		padding: 2em 3em 2em 3em;
 	}
 </style>

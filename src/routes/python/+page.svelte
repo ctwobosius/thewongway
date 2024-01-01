@@ -4,7 +4,7 @@
 	import { storeHighlightJs } from '@skeletonlabs/skeleton';
 
 	import hljs from 'highlight.js/lib/core';
-	import 'highlight.js/styles/github-dark.css';
+	import 'highlight.js/styles/monokai.css';
 
 	// Import each language module you require
 	import python from 'highlight.js/lib/languages/python';
@@ -124,23 +124,5 @@
   .fade-in {
     animation: fadeIn 1.5s ease-in-out;
   }
-	:global(body) {
-		background-image: linear-gradient(-42deg, --color-primary, --color-secondary) !important;
-
-		transition: background-color 0.3s;
-		animation: gradient 32s cubic-bezier(.31,0,.69,.99) infinite;
-	}
-
-
-	@keyframes gradient {
-		0%, 100% {
-			background-position: 71% 0%;
-			background-size: 400% 400%
-		}
-		50% {
-			background-size: 200% 200%;
-			background-position: 30% 100%;
-		}
-	}
 
 </style>

@@ -2,6 +2,7 @@
 	import '../app.postcss';
 	import { AppShell, AppBar, TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
 	import CPP from "$lib/asset/cplusplus.svg"
+	import Bonfire from "$lib/asset/bonfire-pixabay.jpg"
 	import { base } from '$app/paths';
 </script>
 
@@ -24,13 +25,44 @@
 	#footer {
 		margin-bottom: 4em;
 	}
+
+	:global(body) {
+		background-image: linear-gradient(-42deg, #63331664, #642b1853) !important;
+		/* background-image: linear-gradient(-42deg, #de1e00, #d63200) !important; */
+		background-color: rgb(7, 14, 23) !important;
+		transition: background-color 0.3s;
+		animation: gradient 32s cubic-bezier(.31,0,.69,.99) infinite;
+		z-index: 0;
+	}
+
+
+	@keyframes gradient {
+		0%, 100% {
+			background-size: 200% 200%;
+			background-position: 0% 0%;
+		}
+		50% {
+			background-size: 100% 100%;
+			background-position: 90% 100%;
+		}
+	}
+
+	.bg-image {
+		position: fixed;
+		top: 0;
+		left: 0;
+		opacity: 5%;
+		width: 100%;
+		z-index: -1 !important;
+	}
 </style> 
 
 <!-- App Shell -->
 <AppShell>
+	<img class="bg-image" src={Bonfire} alt="Background">
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
-		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" padding="p-3">
+		<AppBar background="bg-gradient-to-r from-medium-light-orange/[.1] to-medium-orange/[.3]" gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" padding="p-3">
 			<svelte:fragment slot="lead">
 				<strong class="text-xl uppercase" id="lead-app-bar">Crash Can</strong>
 			</svelte:fragment>
@@ -42,7 +74,7 @@
 				flex="flex-1 lg:flex-none"
 				rounded=""
 				border=""
-				class="bg-surface-100-800-token w-full"
+				class="w-full"
 				>
 					<TabAnchor href="{base}/" target="_self">
 						<span class="centered">

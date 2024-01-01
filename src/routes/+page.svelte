@@ -2,6 +2,7 @@
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import UserCheck from '$lib/asset/user-check.svg';
 	import Hipster from '$lib/asset/hipster_625710.png';
+	import Stars from '$lib/components/stars.svelte';
 
 	// Class representing a fixed message and its reply.
 	class FixedMessage {
@@ -131,14 +132,15 @@
 	<title>The Wong Way</title>
 </svelte:head>
 
+<Stars></Stars>
 <div class="container w-full mx-auto flex justify-center items-center">
 	<div
-		class="prose lg:prose-xl prose max-w-full dark:prose-invert space-y-10 text-center flex flex-col items-center"
+		class="prose lg:prose-xl prose max-w-full dark:prose-invert space-y-10 flex flex-col items-center"
 	>
 		<br>
 		<h1>Welcome!</h1>
 		<!-- Animated BG -->
-		<section class="img-bg" />
+		<!-- <section class="img-bg" /> -->
 
 		<div class="space-y-2">
 			<p></p>
@@ -154,8 +156,11 @@
 	</div>
 	<br />
 </div>
+
+<br>
+
 <div bind:this={elemChat} class="max-h-[500px] min-h-[500px] p-4 overflow-y-auto space-y-4">
-	{#each messageFeed as bubble, i}
+	{#each messageFeed as bubble, _i}
 		{#if bubble.host === false}
 			<!-- Host Message Bubble -->
 			<div class="grid grid-cols-[auto_1fr] gap-2">
@@ -163,7 +168,7 @@
 				<div class="card p-4 variant-soft rounded-tl-none space-y-2">
 					<header class="flex justify-between items-center">
 						<p class="font-bold">{bubble.name}</p>
-						<small class="opacity-50">{bubble.timestamp}</small>
+						<small class="opacity-70">{bubble.timestamp}</small>
 					</header>
 					<p>{bubble.message}</p>
 				</div>
@@ -174,7 +179,7 @@
 				<div class="card p-4 rounded-tr-none space-y-2 {bubble.color}">
 					<header class="flex justify-between items-center">
 						<p class="font-bold">{bubble.name}</p>
-						<small class="opacity-50">{bubble.timestamp}</small>
+						<small class="opacity-70">{bubble.timestamp}</small>
 					</header>
 					<p>{bubble.message}</p>
 				</div>
@@ -185,7 +190,7 @@
 	{/each}
 </div>
 
-<footer class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token">
+<footer class="opacity-50 input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token">
 	<div class="input-group-shim"></div>
 	<input
 		style="vertical-align: middle; padding-left: 0.75vw;"

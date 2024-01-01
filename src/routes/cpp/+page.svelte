@@ -2,7 +2,7 @@
 	import { storeHighlightJs } from '@skeletonlabs/skeleton';
 
 	import hljs from 'highlight.js/lib/core';
-	import 'highlight.js/styles/github-dark.css';
+	import 'highlight.js/styles/monokai.css';
 
 	// Import each language module you require
 	import cpp from 'highlight.js/lib/languages/cpp';
@@ -125,12 +125,12 @@ int main()
 
 <!-- Body -->
 <div class="container mx-auto flex justify-center items-center">
-	<div class="space-y-10 w-full">
-		<br>
+	<div class="w-full">
 		<!-- Animated Logo -->
 		<section class="img-bg" />
 
 		<article class="prose prose-neutral lg:prose-xl prose max-w-full dark:prose-invert">
+			<br> <br>
 			<h1 class="text-center">"Gee, Yet Another C++ Guide"</h1>
 			<CodeTutorial page_suffix="C++" sections={sections_} default_language="cpp"></CodeTutorial>
 		</article>
