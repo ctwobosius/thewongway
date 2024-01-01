@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { storeHighlightJs } from '@skeletonlabs/skeleton';
+	import Stars from '$lib/components/stars.svelte';
 
 	import hljs from 'highlight.js/lib/core';
 	import 'highlight.js/styles/monokai.css';
@@ -122,7 +123,7 @@ int main()
 	console.log(hljs);
 </script>
 
-
+<Stars duration=5000></Stars>
 <!-- Body -->
 <div class="container mx-auto flex justify-center items-center">
 	<div class="w-full">

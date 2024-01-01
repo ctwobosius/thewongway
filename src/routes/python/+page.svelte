@@ -2,6 +2,7 @@
 	import Disapprove from '$lib/asset/disapprove_pixabay.svg';
 	import ThumbsUpHarold from '$lib/asset/thumbs_up_harold.jpg'
 	import { storeHighlightJs } from '@skeletonlabs/skeleton';
+	import Stars from '$lib/components/stars.svelte';
 
 	import hljs from 'highlight.js/lib/core';
 	import 'highlight.js/styles/monokai.css';
@@ -58,6 +59,7 @@
   });
 </script>
 
+<Stars duration=5000></Stars>
 <!-- Body -->
 <div class="container mx-auto flex justify-center items-center">
 	<div class="space-y-10 w-full">
