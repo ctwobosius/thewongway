@@ -4,6 +4,9 @@
 
 	import { TreeView, TreeViewItem, CodeBlock } from '@skeletonlabs/skeleton';
 
+	// Default theme to use
+	import 'highlight.js/styles/monokai.css';
+
 	let myTreeView: TreeView;
 
 	export let page_suffix = '';

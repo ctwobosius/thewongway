@@ -1,17 +1,14 @@
 <script lang="ts">
+	// Highlight JS Boilerplate
 	import { storeHighlightJs } from '@skeletonlabs/skeleton';
+	import hljs from 'highlight.js/lib/core';
+	storeHighlightJs.set(hljs);
+	import cpp from 'highlight.js/lib/languages/cpp';
+	hljs.registerLanguage("cpp", cpp);
+
 	import Stars from '$lib/components/stars.svelte';
 
-	import hljs from 'highlight.js/lib/core';
-	import 'highlight.js/styles/monokai.css';
-
-	// Import each language module you require
-	import cpp from 'highlight.js/lib/languages/cpp';
-
 	import CodeTutorial from '../code_tutorial.svelte';
-
-	storeHighlightJs.set(hljs);
-	hljs.registerLanguage('cpp', cpp);
 
 	const sections_ = {
 		'Why does C++ exist?': [
@@ -120,7 +117,6 @@ int main()
 			'Lockless Containers': ['']
 		}
 	};
-	console.log(hljs);
 </script>
 
 <Stars duration=5000></Stars>
